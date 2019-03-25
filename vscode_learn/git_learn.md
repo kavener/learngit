@@ -84,7 +84,7 @@
 
 下一步，就可以把本地库的所有内容推送到远程库上：
 
-`$ git push -u origin master`
+`git push -u origin master`
 
 把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支master推送到远程。
 
@@ -92,7 +92,7 @@
 
 从现在起，只要本地作了提交，就可以通过命令：
 
-`$ git push origin master`
+`git push origin master`
 
 讲了先有本地库，后有远程库的时候，如何关联远程库。
 
