@@ -3,6 +3,7 @@
     人员安全许可证
     http://www.hebjs.gov.cn/was5/web/search?page=2&channelid=293219&perpage=15&outlinepage=10&username=&zsbh=&qymc=
     内嵌网页，直接单独请求即可
+
 '''
 
 import re
@@ -11,7 +12,8 @@ import time
 import pymysql
 import random
 
-db = pymysql.connect(host='localhost', user='root', password='root', port=3306, db='lyp_prov')
+db = pymysql.connect(host='localhost', user='root',
+                     password='root', port=3306, db='lyp_prov')
 cursor = db.cursor()
 
 
@@ -57,7 +59,8 @@ def get_page(url):
 
 def parse_data(html):
     # 意即空格 ' ' ? '\t' 似乎都是表示空格的.
-    pat = re.compile('<tr>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?</tr>', re.S)
+    pat = re.compile(
+        '<tr>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?</tr>', re.S)
     results = re.findall(pat, html)
     if results:
         certs = []
@@ -82,18 +85,22 @@ def save_data(certs):
     '''
     for cert_dict in certs:
         # repeat testing
-        sql_rep = 'select cert_id from hebei_per_secur_lice where cert_code=\'{}\''.format(cert_dict['cert_code'])
+        sql_rep = 'select cert_id from hebei_per_secur_lice where cert_code=\'{}\''.format(
+            cert_dict['cert_code'])
         cursor.execute(sql_rep)
         one = cursor.fetchone()
         if one:
             continue
         else:
             # save new data
-            # 
+            #
             sql_insert = 'INSERT INTO hebei_per_secur_lice(person_name, cert_code, com_name, vaild) values(%s, %s, %s, %s)'
             cursor.execute(sql_insert, (
                 cert_dict['person_name'], cert_dict['cert_code'], cert_dict['com_name'], cert_dict['valid']))
             db.commit()
+
+# learn git and js. with python, also including crwaler.
+# 
 
 
 def get_all():
@@ -110,6 +117,7 @@ def get_all():
                 save_data(certs)
         time.sleep(random.randint(1, 10))
         page += 1
+# 
 
 
 get_all()
