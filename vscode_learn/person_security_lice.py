@@ -100,7 +100,7 @@ def save_data(certs):
             db.commit()
 
 # learn git and js. with python, also including crwaler.
-# 
+
 
 
 def get_all():
