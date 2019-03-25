@@ -72,7 +72,8 @@ def request_format(Request_headers):
         headers[result.group(1)] = result.group(2)
         times = times - 1
     return headers
-
+    
+ 
 header = '''
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
 Accept-Encoding: gzip, deflate

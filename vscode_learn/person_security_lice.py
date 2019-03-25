@@ -5,7 +5,7 @@
     内嵌网页，直接单独请求即可
 
 '''
-
+import scrapy
 import re
 import requests
 import time
@@ -109,23 +109,24 @@ def save_data(certs):
         if one:
             continue
         else:
-            # save new data
+
+             
             table = 'hebei_per_secur_lice'
             keys = ','.join(cert_dict.keys())
             values = ','.join(['%s'] * len(cert_dict))
             sql_insert = 'INSERT INTO {table}}({keys}}) values({values}})'.format(
                 table, keys, values)
-            # 用元组解析即可
+            # use tuple.
             cursor.execute(sql_insert, tuple(cert_dict.values()))
             db.commit()
 
-# learn git and js. with python, also including crwaler.
+# learn git and js. with python, also including crwaler. the most powerful git with vscode.
 
 
 
 def get_all():
     '''
-    汇总函数，采集所有数据并存储
+    by all. get all.
     '''
     MAX_PAGES = 13034
     page = 11458
@@ -139,12 +140,14 @@ def get_all():
             if certs != -1:
                 save_data(certs)
         time.sleep(random.randint(1, 10))
-        page += 1     
-# 提交新的信息
+        page += 1
+# commit new information. 
+
 
 get_all()
 
 
 # 利用调试找出编写过程中的bug，然后在实际使用时就可以利用终端奔跑数
 # 数据的采集，数据清晰，存储，然后关键是对数据的利用，比如数据分析，展示等
-
+# 提交所有已经暂存的修改，GIT确实是个强大的代码同步工具，我需要学着使用，尤其是自身的side project活动需要最大
+# 其次是公司的代码可以直接提交私密仓库中以备份代码
