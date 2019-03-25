@@ -59,6 +59,12 @@ def get_page(url):
 
 def parse_data(html):
     # 意即空格 ' ' ? '\t' 似乎都是表示空格的.
+    '''
+    可以编写一个描述通用的解析函数，功能即解析需要的数据并返回字典列表
+    参数：
+    1. 正则表达式规则（str）
+    2. 带解析的数据（str）
+    '''
     pat = re.compile(
         '<tr>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?<td>(.*?)</td>.*?</tr>', re.S)
     results = re.findall(pat, html)
@@ -81,7 +87,13 @@ def parse_data(html):
 
 def save_data(certs):
     '''
-    用于存储解析好的数据
+    用于储存数据，可以编写一个描述通用的存储方法，有两个功能
+    1 存储时检测带存储数据是否已经存在，如果存在就不存储
+    2 存储相应数据 
+    那么参数应该是哪些呢？  
+    1. 数据表名称(str)
+    2. 需要去重对比的字段名称  此处可能需要考虑多个字段名称的参数问题(*str)
+    3. 需要存储的数据（dict）
     '''
     for cert_dict in certs:
         # repeat testing
@@ -93,10 +105,13 @@ def save_data(certs):
             continue
         else:
             # save new data
-            #
-            sql_insert = 'INSERT INTO hebei_per_secur_lice(person_name, cert_code, com_name, vaild) values(%s, %s, %s, %s)'
-            cursor.execute(sql_insert, (
-                cert_dict['person_name'], cert_dict['cert_code'], cert_dict['com_name'], cert_dict['valid']))
+            table = 'hebei_per_secur_lice'
+            keys = ','.join(cert_dict.keys())
+            values = ','.join(['%s'] * len(cert_dict))
+            sql_insert = 'INSERT INTO {table}}({keys}}) values({values}})'.format(
+                table, keys, values)
+            # 用元组解析即可
+            cursor.execute(sql_insert, tuple(cert_dict.values()))
             db.commit()
 
 # learn git and js. with python, also including crwaler.
@@ -104,10 +119,13 @@ def save_data(certs):
 
 
 def get_all():
+    '''
+    汇总函数，采集所有数据并存储
+    '''
     MAX_PAGES = 13034
     page = 11458
     while page <= MAX_PAGES:
-        print('Crawling data on ' + str(page) + ' pages.')
+        print('Crawling data at ' + str(page) + ' pages.')
         url = 'http://www.hebjs.gov.cn/was5/web/search?page={}&channelid=293219&perpage=15&outlinepage=10&username=&zsbh=&qymc='.format(
             page)
         html = get_page(url)
@@ -116,11 +134,11 @@ def get_all():
             if certs != -1:
                 save_data(certs)
         time.sleep(random.randint(1, 10))
-        page += 1
-# 
-
+        page += 1     
+# 提交新的信息
 
 get_all()
 
 
-# 利用调试找出编写过程中的bug，然后在实际使用时就可以利用终端奔跑数据
+# 利用调试找出编写过程中的bug，然后在实际使用时就可以利用终端奔跑数
+# 数据的采集，数据清晰，存储，然后关键是对数据的利用，比如数据分析，展示等
