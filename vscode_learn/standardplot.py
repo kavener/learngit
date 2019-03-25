@@ -6,3 +6,4 @@ plt.plot(x, np.sin(x))       # Plot the sine of each x point
 plt.show()                   # Display the plot
 list(x)
 print(list(x))
+import pylint

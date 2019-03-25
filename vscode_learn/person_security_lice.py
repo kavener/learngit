@@ -45,6 +45,11 @@ headers = request_format(request_headers)
 
 
 def get_page(url):
+    '''
+    获取通用页面 
+    :param url: 目标页面链接
+    :return: html页面
+    '''
     try:
         response = requests.get(url, headers, timeout=120)
         if response.status_code == 200:
@@ -142,3 +147,4 @@ get_all()
 
 # 利用调试找出编写过程中的bug，然后在实际使用时就可以利用终端奔跑数
 # 数据的采集，数据清晰，存储，然后关键是对数据的利用，比如数据分析，展示等
+

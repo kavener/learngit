@@ -93,7 +93,6 @@ print(proxy)
 # 114.238.125.179:894
 # 119.180.133.196:8060
 test_response = requests.get('http://jzsc.mohurd.gov.cn/dataservice/query/project/projectDetail/1101111807030101', headers=headers, proxies=proxy, timeout=120)
-
 print(test_response.text)
 print(test_response.status_code)
 
