@@ -49,4 +49,53 @@
 ---
 
 删除操作，比如我们想要删除已经在版本库中的某个文件
-我们可能会直接
+
+`git rm readme.txt`
+
+`git commit -m "rm readme.txt"`
+
+即可完成真正真正删除操作，那么我删错了怎么办呢？ 可以：`git checkout -- test.txt`
+
+---
+接下来是比较有趣的内容，即<b>远程仓库</b>， 这也是Git的杀手级功能，利用github.com获取免费强大的远程仓库再好不过了！
+由于本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置：
+
+`$ ssh-keygen -t rsa -C "youremail@example.com"`
+
+然后一路回车即可
+第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴`id_rsa.pub`文件的内容
+
+为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
+
+当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
+
+最后友情提示，在GitHub上免费托管的Git仓库，任何人都可以看到喔（但只有你自己才能改）。所以，不要把敏感信息放进去。
+
+如果你不想让别人看到Git库，有两个办法，一个是现在Github也已经免费了私密仓库！！！ 另一个办法是自己动手，搭一个Git服务器，因为是你自己的Git服务器，所以别人也是看不见的。这个方法我们后面会讲到的，相当简单，公司内部开发必备。
+
+确保你拥有一个GitHub账号后，我们就即将开始远程仓库的学习。
+
+接下来在github上创建一个仓库，然后按照github上的提示可以把一个已有的本地仓库与之关联，然后将本地仓库的内容推送到Github仓库中
+
+`git remote add origin git@github.com:example-github-id/example-git-name.git`
+
+添加后，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库。
+
+下一步，就可以把本地库的所有内容推送到远程库上：
+
+`$ git push -u origin master`
+
+把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支master推送到远程。
+
+由于远程库是空的，我们第一次推送master分支时，加上了`-u`参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+
+从现在起，只要本地作了提交，就可以通过命令：
+
+`$ git push origin master`
+
+讲了先有本地库，后有远程库的时候，如何关联远程库。
+
+现在，假设我们从零开发，那么最好的方式是先创建远程库，然后，从远程库克隆。那么我们如何从远程库中克隆到本地呢？ 很简单：
+
+`git clone git@github.com:example-github-id/example-git-name.git`
