@@ -64,6 +64,9 @@ def get_page(url):
 
 def parse_data(html):
     # 意即空格 ' ' ? '\t' 似乎都是表示空格的.
+    # 七月目标：当然最高目标是找到一份像智库二八六一的爬虫工程师的工作，那么我也可以降低目标在更短的时间去尝试熟悉市场需求，甚至找一份比现在薪资高些的工作啊  
+    #  
+    # 奇怪的是代理非法仍然可以发出请求并返回正确数据
     '''
     可以编写一个描述通用的解析函数，功能即解析需要的数据并返回字典列表
     参数：
@@ -89,7 +92,6 @@ def parse_data(html):
         print('PARSE ERROR.')
         return -1
 
-
 def save_data(certs):
     '''
     用于储存数据，可以编写一个描述通用的存储方法，有两个功能
@@ -97,8 +99,8 @@ def save_data(certs):
     2 存储相应数据 
     那么参数应该是哪些呢？  
     1. 数据表名称(str)
-    2. 需要去重对比的字段名称  此处可能需要考虑多个字段名称的参数问题(*str)
-    3. 需要存储的数据（dict）
+    2. 需要去重对比的字段名称，此处可能需要考虑多个字段名称的参数问题(*str)
+    3. 需要存储的数据(dict)
     '''
     for cert_dict in certs:
         # repeat testing
@@ -107,10 +109,9 @@ def save_data(certs):
         cursor.execute(sql_rep)
         one = cursor.fetchone()
         if one:
+            # 测试调试手段
             continue
         else:
-
-             
             table = 'hebei_per_secur_lice'
             keys = ','.join(cert_dict.keys())
             values = ','.join(['%s'] * len(cert_dict))
@@ -151,3 +152,4 @@ get_all()
 # 数据的采集，数据清晰，存储，然后关键是对数据的利用，比如数据分析，展示等
 # 提交所有已经暂存的修改，GIT确实是个强大的代码同步工具，我需要学着使用，尤其是自身的side project活动需要最大
 # 其次是公司的代码可以直接提交私密仓库中以备份代码
+# 使用多窗口管理不同项目
