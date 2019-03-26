@@ -64,8 +64,12 @@ def get_page(url):
 
 def parse_data(html):
     # 意即空格 ' ' ? '\t' 似乎都是表示空格的.
-    # 七月目标：当然最高目标是找到一份像智库二八六一的爬虫工程师的工作，那么我也可以降低目标在更短的时间去尝试熟悉市场需求，甚至找一份比现在薪资高些的工作啊  
-    #  
+    # 七月目标：当然最高目标是找到一份像智库二八六一的爬虫工程师的工作，那么我也可以降低目标在更短的时间去尝试熟悉市场需求，甚至找一份比现在薪资高些的工作啊 
+    # 不行，我不能妥协，要做就努力往好里做！ 我要达到的能力就是遇到需求可以拿出近似最优解！ 即能够得到一份满意的工作，10K以下的是我选择公司，而不是公司选我
+    # 其实有很多需要或者可以锻炼的地方，而我就是懒得思考，只觉得做出来就行，而不是不断优化程序，重构，不断做到更优解，甚至思考其内部原理，设计模式，数据结构与算法等，这样怎么成为一名高手呢？
+    # Python透析数据结构与算法 Python语言及面向对象（设计模式） Python并行编程及分布式架构 Python爬虫（请求（requests，js，selenium，appnium...），解析（正则，Xpath，CSS-Selector， PyQuery...），Scrapy） MySQL（高性能）
+    # 即从本质来看，爬虫仅仅是一个应用点，其根本还是Python、数据结构算法等内功、编程能力的修炼
+    # 
     # 奇怪的是代理非法仍然可以发出请求并返回正确数据
     '''
     可以编写一个描述通用的解析函数，功能即解析需要的数据并返回字典列表
@@ -120,7 +124,7 @@ def save_data(certs):
             # use tuple.
             cursor.execute(sql_insert, tuple(cert_dict.values()))
             db.commit()
-
+    # 
 # learn git and js. with python, also including crwaler. the most powerful git with vscode.
 
 
