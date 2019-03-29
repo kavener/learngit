@@ -184,10 +184,36 @@ def f1():
 # f1()
 # action()
 
-
+# 工厂函数，实现了类似类的状态保存机制，而本质就是一个嵌套函数，利用变量保存所谓的“属性”
 def maker(N):
     def action(X):
         return X ** N
     return action
 f = maker(2)
-print(f)
+print(f(3))
+
+def fuc(N):
+    # x = 4
+    action = (lambda n: f(n) ** N)
+    # 匿名函数表达式
+    return action
+
+action = fuc(2)
+print(action(2))
+
+class tester:
+    def __init__(self, start):
+        self.start = start
+        # return start
+    
+    def nested(self, label):
+        print(label, self.start)
+        self.start += 1
+F = tester(0)
+F.nested('spam')
+
+def f_args(**args):
+    print(args)
+f_args(h=2,r=3,c=4)
+# 然后再实现一个动态解包，岂不是上天
+# 函数本身的设计概念
