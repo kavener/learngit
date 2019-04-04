@@ -1,3 +1,4 @@
+# Python OOP 初探系列 --> 设计模式
 class FirstClass:
     def setdata(self, value):
         self.data = value
